@@ -11,14 +11,14 @@
  */
 class Solution {
 public:
-    bool pre(TreeNode* r,int x){
+    bool preOrder(TreeNode* root,int x){
         //EC/BC:Given Emoty Tree/reched null;
-        if(r == NULL) return true;
-        if(r->val != x) return false;
+        if(root == NULL) return true;
+        if(root->val != x) return false;
         
-        return pre(r->left,x) && pre(r->right,x);
+        return preOrder(root->left,x) && preOrder(root->right,x);
     }
     bool isUnivalTree(TreeNode* root) {
-        return pre(root,root->val);
+        return preOrder(root,root->val);
     }
 };
