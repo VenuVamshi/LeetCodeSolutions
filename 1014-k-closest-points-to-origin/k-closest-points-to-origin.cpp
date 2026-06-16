@@ -1,10 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include <queue>
-using namespace std;
-
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
