@@ -2,26 +2,33 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
 
-        // Frequency table
-        unordered_map<int, int> frequencyMap;
-
-        // Phase 1: Count occurrences
-        for (int num : nums) {
-
-            frequencyMap[num]++;
-        }
+        // Bring equal elements together
+        sort(nums.begin(), nums.end());
 
         vector<int> answer;
 
-        // Phase 2: Find elements occurring more than n/3 times
-        for (auto entry : frequencyMap) {
+        // Frequency of current group
+        int frequency = 1;
 
-            int element = entry.first;
-            int frequency = entry.second;
+        for (int i = 1; i <= nums.size(); i++) {
 
-            if (frequency > nums.size() / 3) {
+            // Extend current group
+            if (i < nums.size() && nums[i] == nums[i - 1]) {
 
-                answer.push_back(element);
+                frequency++;
+            }
+
+            // Current group ends
+            else {
+
+                // Add element if frequency exceeds n/3
+                if (frequency > nums.size() / 3) {
+
+                    answer.push_back(nums[i - 1]);
+                }
+
+                // Start counting next group
+                frequency = 1;
             }
         }
 
