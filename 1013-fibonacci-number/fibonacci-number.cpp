@@ -4,17 +4,15 @@ public:
         //base case
         if (n == 0) return 0;
         //init base states
-        int a = 0;
-        int b = 1;
-        int c;
+        int a = 0,b = 1,ans;
         //Compute Fibonacci iteratively
         for(int i = 2; i <= n; i++){
-            c = a + b;
+            ans = a + b;
             // Shift previous values
             a = b;
-            b = c;
+            b = ans;
         }
-        return c;
+        return ans;
         
     }
 };
