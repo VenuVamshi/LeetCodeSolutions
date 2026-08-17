@@ -10,52 +10,60 @@
  */
 class Solution {
 public:
-    // ListNode* reverseLL(ListNode* head){
-    //     ListNode* prev = NULL;
-    //     ListNode* curr = head;
-    //     ListNode* next = NULL;
+    ListNode* reverseLL(ListNode* head){
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* next = NULL;
 
-    //     while(curr){
+        while(curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
 
-    //         next = curr->next;
+    ListNode* findMidOfLL(ListNode* head){
+        ListNode  *slow = head, *fast = head;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
 
-    //         curr->next = prev;
-
-    //         prev = curr;
-    //         curr = next;
-
-    //     }
-    //     return prev;
-    // }
     bool isPalindrome(ListNode* head) {
-        // ListNode* h1 = head;
-        // ListNode* h2 = reverseLL(h1);
-        // ListNode* t1 = h1;
-        // ListNode* t2 = h2;
-        // while(t1 && t2){
-        //     if(t1->val != t2->val) return false;
-        //     t1 = t1->next ;
-        //     t2 = t2->next;
-        // }
-        // return true;
+        ListNode* firsthalf = head;
+        ListNode* secondhalf= reverseLL(findMidOfLL(head));
+        ListNode* t1 = firsthalf;
+        ListNode* t2 = secondhalf;
 
-        vector<int> v;
-        ListNode* cur = head;
-        while(cur){
-            v.push_back(cur->val);
-            cur = cur->next;
+        while(t2 && t1){
+            if(t1->val != t2->val) return false;
+            t1 = t1->next ;
+            t2 = t2->next;
         }
 
-        int low = 0;
-        int high = v.size()-1;
-
-        while(low < high){
-            if(v[low] != v[high]){
-                return false;
-            }
-            low++;
-            high--;
-        }
         return true;
+
+    //     vector<int> v;
+    //     ListNode* cur = head;
+    //     while(cur){
+    //         v.push_back(cur->val);
+    //         cur = cur->next;
+    //     }
+
+    //     int low = 0;
+    //     int high = v.size()-1;
+
+    //     while(low < high){
+    //         if(v[low] != v[high]){
+    //             return false;
+    //         }
+    //         low++;
+    //         high--;
+    //     }
+    //     return true;
     }
 };
