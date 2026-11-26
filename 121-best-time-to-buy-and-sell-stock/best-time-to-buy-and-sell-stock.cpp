@@ -3,16 +3,17 @@ public:
 
     int maxProfit(vector<int>& prices) {
 
-        int buyPrice = prices[0];
-        int profit = 0;
+        int buyPrice = prices[0];//MinPrice in all prev days 
+        int maxProfit = 0;//Global maxProfit
 
-        for(int i = 1; i < prices.size(); i++){
-            
-            buyPrice = min(buyPrice,prices[i]);
-
-            profit = max(profit,prices[i] - buyPrice);
-
+        for (int day = 1 ; day < prices.size(); day++){
+            //calculate current profit
+            int curProfit = prices[day] - buyPrice;
+            //update Global variables 
+            maxProfit = max(maxProfit,curProfit);
+            //update buyPrice 
+            buyPrice = min(buyPrice,prices[day]);
         }
-        return profit;
+        return maxProfit;
     }
 };
