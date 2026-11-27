@@ -3,22 +3,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        c0,c1,c2 = 0,0,0
-        for num in nums:
-            if num == 0: c0 += 1
-            elif num == 1: c1 += 1
-            else: c2 += 1
-        for i in range(0,len(nums)):
-            if c0 > 0:
-                nums[i] = 0
-                c0 -= 1
-                continue
-            if c1 > 0 :
-                nums[i] = 1
-                c1 -= 1
-                continue 
-            if c2 > 0:
-                nums[i] = 2
-                c2 -= 1
-                continue
+        l,m,h = 0,0,len(nums)-1
+
+        while m <= h:
+            if nums[m] == 0:
+                nums[l],nums[m] = nums[m],nums[l]
+                l += 1
+                m += 1
+            elif nums[m] == 1: m += 1
+            else :
+                nums[m],nums[h] = nums[h],nums[m]
+                h -= 1
         
